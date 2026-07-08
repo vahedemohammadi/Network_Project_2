@@ -1,20 +1,26 @@
-# گزارش تفصیلی فاز سوم: تحلیل رفتار سرور و زمان‌بندی RTT
+# Phase 3 Detailed Report: Server Response and RTT Analysis
 
-## مشخصات پروژه
-- **نام و نام خانوادگی:** واحده محمدی
-- **شماره دانشجویی:** 40217023166
-- **درس:** شبکه‌های کامپیوتر
-- **موضوع:** تحلیل پاسخ HTTP، کد وضعیت (Status Code) و محاسبه زمان رفت‌وبرگشت (RTT)
+## Project Information
 
----
-
-## ۱. مقدمه و اهداف فاز سوم
-در فازهای قبلی، نحوه ارسال درخواست HTTP GET و بررسی هدر لایه‌های مختلف TCP/IP انجام شد. هدف از این فاز، بررسی پاسخ دریافت شده از سمت سرور وب، استخراج و تحلیل کد وضعیت HTTP (Status Code)، محاسبه دقیق زمان رفت‌وبرگشت پیام در لایه کاربرد (Application Layer RTT) و در نهایت تحلیل مهندسی علل تاخیر در ارتباطات شبکه می‌باشد.
+- **Student Name:** Vahedeh Mohamadi
+- **Student ID:** 40217023166
+- **Course:** Computer Networks
+- **Topic:** HTTP Response Analysis, Status Code Examination, and Round Trip Time (RTT) Measurement
 
 ---
 
-## ۲. استخراج و تحلیل داده‌های پکت پاسخ (HTTP Response)
+# 1. Introduction and Objectives
 
-برای یافتن پکت پاسخ در وایرشارک از فیلتر زیر استفاده شده است:
+In the previous phases, the HTTP **GET** request and the protocol headers across the TCP/IP layers were analyzed.
+
+The objective of this phase is to examine the HTTP response received from the web server, extract and analyze the HTTP **Status Code**, accurately measure the **Application Layer Round Trip Time (RTT)**, and investigate the possible causes of communication delays from a network engineering perspective.
+
+---
+
+# 2. HTTP Response Packet Analysis
+
+To locate the HTTP response packet in Wireshark, the following display filter was used:
+
 ```text
 http.response.code == 200
+```

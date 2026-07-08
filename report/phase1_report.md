@@ -1,63 +1,63 @@
-# گزارش فاز اول
+# Phase 1 Report
 
-## هدف
+## Objective
 
-هدف از این فاز، تولید ترافیک HTTP با استفاده از ابزار **cURL** و ضبط آن توسط نرم‌افزار **Wireshark** است تا بسته‌های شبکه برای تحلیل در مراحل بعدی ثبت شوند.
+The objective of this phase is to generate **HTTP** traffic using the **cURL** command-line tool and capture the generated packets with **Wireshark**. The captured packets will be used for detailed analysis in the subsequent phases of the project.
 
 ---
 
-## ابزارهای مورد استفاده
+## Tools Used
 
 - Wireshark
 - cURL
-- خط فرمان ویندوز (Windows Command Prompt)
+- Windows Command Prompt
 
 ---
 
-## مراحل انجام کار
+## Procedure
 
-### مرحله ۱
+### Step 1
 
-نرم‌افزار **Wireshark** اجرا شد و فرآیند ضبط بسته‌های شبکه (Packet Capture) بر روی رابط شبکه فعال (Wi-Fi) آغاز گردید.
+The **Wireshark** application was launched, and packet capturing was started on the active network interface (Wi-Fi).
 
-### مرحله ۲
+### Step 2
 
-به‌منظور تولید ترافیک HTTP، دستورات زیر در محیط **Command Prompt** اجرا شدند:
+To generate HTTP traffic, the following commands were executed in the **Windows Command Prompt**:
 
 ```bash
 curl http://example.com
 curl http://neverssl.com
 ```
 
-### مرحله ۳
+### Step 3
 
-پس از ارسال درخواست‌ها، فرآیند ضبط بسته‌ها متوقف شد و فایل Capture با فرمت **PCAPNG** ذخیره گردید.
+After the HTTP requests were sent successfully, the packet capture process was stopped, and the captured traffic was saved as a **PCAPNG** file.
 
-### مرحله ۴
+### Step 4
 
-برای مشاهده و جداسازی بسته‌های مربوط به درخواست‌های HTTP، از فیلتر زیر در نرم‌افزار Wireshark استفاده شد:
+To identify and isolate HTTP request packets, the following display filter was applied in **Wireshark**:
 
 ```text
 http.request
 ```
 
-### مرحله ۵
+### Step 5
 
-در نهایت، درخواست **HTTP GET** و پاسخ دریافتی از سرور (**HTTP 200 OK**) مورد بررسی و تحلیل قرار گرفتند.
+Finally, the captured **HTTP GET** request and the corresponding **HTTP/1.1 200 OK** server response were examined and analyzed.
 
 ---
 
-## فایل‌های ایجاد شده
+## Generated Files
 
-### فایل ضبط ترافیک (Capture)
+### Capture File
 
-```
+```text
 captures/phase1_capture.pcapng
 ```
 
-### تصاویر
+### Images
 
-```
+```text
 images/phase1/image1_capture.png
 images/phase1/image2_curl_commands.png
 images/phase1/image3_http_get_details.png
@@ -67,6 +67,6 @@ images/phase1/image5_http_response_200_ok.png
 
 ---
 
-## نتیجه‌گیری
+## Conclusion
 
-در این فاز، ترافیک **HTTP** با موفقیت توسط ابزار **cURL** تولید و با استفاده از نرم‌افزار **Wireshark** ضبط شد. سپس درخواست **HTTP GET** و پاسخ سرور (**HTTP 200 OK**) شناسایی و تحلیل شدند. نتایج این مرحله، مبنای بررسی دقیق‌تر هدرهای پروتکل و تحلیل لایه‌های مختلف شبکه در فازهای بعدی پروژه را فراهم کرد.
+In this phase, **HTTP** traffic was successfully generated using **cURL** and captured with **Wireshark**. The captured traffic included an **HTTP GET** request and its corresponding **HTTP/1.1 200 OK** response, both of which were successfully identified and analyzed. The results obtained in this phase provide the foundation for detailed protocol header analysis and TCP/IP layer examination in the subsequent phases of the project.

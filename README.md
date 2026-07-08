@@ -1,36 +1,41 @@
-# پروژه درس شبکه‌های کامپیوتر ۲
+# Network Project 2
 
-## تحلیل ترافیک HTTP با استفاده از وایرشارک (Wireshark) و cURL
-
----
-
-## مشخصات دانشجو
-
-نام و نام خانوادگی: واحده محمدی
-شماره دانشجویی: 40217023166
-نام درس: شبکه‌های کامپیوتر
+## HTTP Traffic Analysis Using Wireshark and cURL
 
 ---
 
-## شرح پروژه
+# Student Information
 
-این پروژه به تحلیل ارتباطات پروتکل HTTP با استفاده از ابزارهای وایرشارک و cURL می‌پردازد. پکت‌های HTTP تولید، ضبط، فیلتر و بر اساس پشته پروتکلی TCP/IP تحلیل می‌شوند. پروژه شامل فازهای مختلفی از جمله ضبط پکت‌ها، تحلیل هدرهای پروتکل، بررسی ارتباطات شبکه، سنجش رفتار سرور و زمان‌بندی (RTT)، و همچنین کالبدشکافی لایه امنیتی HTTPS و TLS Handshake (فاز تشویقی) است.
+| Item | Details |
+|------|---------|
+| **Student Name** | Vahede Mohammadi |
+| **Student ID** | 40217023166 |
+| **Course** | Computer Networks |
 
 ---
 
-## ابزارهای مورد استفاده
+# Project Description
+
+This project focuses on analyzing HTTP communication using **Wireshark** and **cURL**. HTTP packets are generated, captured, filtered, and analyzed based on the **TCP/IP protocol stack**.
+
+The project consists of multiple phases, including packet capturing, protocol header analysis, network communication analysis, Round Trip Time (RTT) measurement, and an optional bonus phase covering **HTTPS** and the **TLS Handshake** process.
+
+---
+
+# Tools Used
 
 - Wireshark
 - cURL
-- Command Prompt / PowerShell ویندوز
+- Windows Command Prompt / PowerShell
 - Git
 - GitHub
 
 ---
 
-## ساختار پروژه (Project Structure)
+# Project Structure
 
-NETWORK_PROJECT_2
+```text
+Network_Project_2
 │
 ├── captures
 │   ├── phase1_capture.pcapng
@@ -65,265 +70,380 @@ NETWORK_PROJECT_2
 │   └── phase4_report.md
 │
 └── README.md
+```
 
 ---
 
-# فاز اول: ضبط و تولید ترافیک شبکه (Phase 1)
+# Phase 1 – HTTP Traffic Generation and Packet Capture
 
-## اهداف فاز اول
+## Objectives
 
-- ضبط ترافیک HTTP با استفاده از Wireshark
-- تولید ترافیک HTTP با ابزار خط فرمان cURL
-- ذخیره پکت‌های ضبط شده با فرمت pcapng.
-- شناسایی و تحلیل درخواست‌های HTTP GET
-- شناسایی و تحلیل پاسخ‌های HTTP 200 OK
+- Capture HTTP traffic using Wireshark.
+- Generate HTTP traffic using the cURL command-line tool.
+- Save captured packets in **.pcapng** format.
+- Identify and analyze HTTP GET requests.
+- Identify and analyze HTTP **200 OK** responses.
 
 ---
 
-## دستورات استفاده‌شده
+## Commands Used
 
+```bash
 curl http://example.com
+
 curl -I http://example.com
+
 curl http://neverssl.com
+```
 
 ---
 
-## فیلترهای نمایش در Wireshark
+## Wireshark Display Filters
 
+```text
 http.request
+```
+
+```text
 http.response
+```
+
+```text
 http
+```
+
+```text
 tcp.port == 80
+```
 
 ---
 
-## فایل‌های فاز اول
+## Phase 1 Files
 
-### فایل کاپچر (Capture File)
+### Capture File
+
+```text
 captures/phase1_capture.pcapng
+```
 
-### تصاویر
+### Images
+
+```text
 images/phase1/image1_capture.png
 images/phase1/image2_curl_commands.png
 images/phase1/image3_http_get_details.png
 images/phase1/image4_http_request_capture.png
 images/phase1/image5_http_response_200_ok.png
+```
 
-### گزارش تفصیلی
+### Detailed Report
+
+```text
 report/phase1_report.md
+```
 
 ---
 
-## نتیجه فاز اول
+## Phase 1 Result
 
-ترافیک HTTP با موفقیت توسط ابزار cURL تولید و در وایرشارک ضبط شد. درخواست‌های HTTP GET و پاسخ‌های سرور (200 OK) شناسایی شدند و پکت‌های کاپچرشده برای تحلیل لایه‌ای در فاز بعدی آماده گردیدند.
+HTTP traffic was successfully generated using **cURL** and captured using **Wireshark**.
+
+The HTTP **GET** request and the corresponding **HTTP/1.1 200 OK** response were successfully identified. The captured packets are now ready for detailed protocol analysis in the next phase.
+---
+
+# Phase 2 – Protocol Header and TCP/IP Layer Analysis
+
+## Objectives
+
+- Apply HTTP display filters in Wireshark.
+- Locate the first HTTP GET request.
+- Analyze the **Application**, **Transport**, and **Network** layers.
+- Extract important header fields from each protocol.
+- Understand the encapsulation of HTTP within the TCP/IP protocol stack.
 
 ---
 
-# فاز دوم: تحلیل هدر پروتکل‌ها و لایه‌های شبکه (Phase 2)
+## Wireshark Display Filters
 
-## اهداف فاز دوم
-
-- اعمال فیلترهای نمایش HTTP در وایرشارک
-- پیدا کردن اولین درخواست HTTP GET
-- تحلیل دقیق لایه‌های کاربرد (Application)، انتقال (Transport) و شبکه (Network)
-- استخراج پارامترهای هدر در پروتکل‌های مختلف
-- درک مفهوم کپسوله‌سازی (Encapsulation) پروتکل HTTP روی پشته TCP/IP
-
----
-
-## فیلترهای مورد استفاده در Wireshark
-
+```text
 http
-یا
+```
+
+or
+
+```text
 tcp.port == 80
+```
 
 ---
 
-## تحلیل لایه‌ای پکت‌ها
+## Packet Analysis
 
-### ۱. لایه کاربرد (Application Layer - HTTP)
+### 1. Application Layer (HTTP)
 
-نام فیلد | مقدار استخراج‌شده
----|---
-HTTP Method | GET
-HTTP Version | HTTP/1.1
-Host | neverssl.com
-User-Agent | curl/8.13.0
+| Field | Value |
+|-------|-------|
+| HTTP Method | GET |
+| HTTP Version | HTTP/1.1 |
+| Host | neverssl.com |
+| User-Agent | curl/8.13.0 |
 
-تحلیل فنی:
-پکت ضبط شده یک درخواست HTTP GET است که توسط ابزار cURL ارسال شده است. درخواست از نسخه HTTP/1.1 استفاده می‌کند، هدر Host سرور مقصد (neverssl.com) را مشخص کرده و هدر User-Agent نشان‌دهنده کلاینت ارسال‌کننده است.
+### Analysis
 
----
+The captured packet is an HTTP **GET** request generated by **cURL**.
 
-### ۲. لایه انتقال (Transport Layer - TCP)
-
-نام فیلد | مقدار استخراج‌شده
----|---
-Protocol | TCP
-Source Port | 10840
-Destination Port | 80
-
-تحلیل فنی:
-ارتباط از پروتکل TCP استفاده می‌کند. پورت مبدا یک پورت تصادفی و موقت است که توسط سیستم‌عامل کلاینت اختصاص یافته و پورت مقصد (80)، پورت استاندارد برای ارتباطات ناامن HTTP است.
+The request uses **HTTP/1.1**, specifies the destination server using the **Host** header, and identifies the client software through the **User-Agent** header.
 
 ---
 
-### ۳. لایه شبکه (Network Layer - IPv4)
+### 2. Transport Layer (TCP)
 
-نام فیلد | مقدار استخراج‌شده
----|---
-Source Address | 192.168.1.12
-Destination Address | 34.223.124.45
+| Field | Value |
+|-------|-------|
+| Protocol | TCP |
+| Source Port | 10840 |
+| Destination Port | 80 |
 
-تحلیل فنی:
-آدرس مبدا (192.168.1.12) متعلق به کلاینت در شبکه محلی است. آدرس مقصد (34.223.124.45) آدرس IP عمومی سرور وب میزبان neverssl.com است. لایه IP مسئول مسیریابی این پکت‌ها در شبکه است.
+### Analysis
+
+The communication uses the **Transmission Control Protocol (TCP)**.
+
+The source port is an **ephemeral port** automatically assigned by the operating system, while the destination port **80** is the standard port used for HTTP communication.
+
+TCP provides reliable, ordered, and error-checked data delivery between the client and the web server.
 
 ---
 
-## تصاویر فاز دوم
+### 3. Network Layer (IPv4)
 
+| Field | Value |
+|-------|-------|
+| Source Address | 192.168.1.12 |
+| Destination Address | 34.223.124.45 |
+
+### Analysis
+
+The source IP address (**192.168.1.12**) belongs to the client within the local network.
+
+The destination IP address (**34.223.124.45**) belongs to the public web server hosting **neverssl.com**.
+
+The IPv4 layer is responsible for logical addressing and routing packets across interconnected networks.
+
+---
+
+## Phase 2 Images
+
+```text
 images/phase2/image1_http_filter.png
 images/phase2/image2_http_get_request.png
 images/phase2/image3_application_layer.png
 images/phase2/image4_transport_layer.png
 images/phase2/image5_network_layer.png
+```
 
 ---
 
-## گزارش تفصیلی
+## Detailed Report
 
+```text
 report/phase2_report.md
+```
 
 ---
 
-## نتیجه فاز دوم
+## Phase 2 Result
 
-پکت HTTP در وایرشارک با موفقیت تحلیل شد. اطلاعات هدر لایه‌های کاربرد، انتقال و شبکه استخراج گردید. این فاز نحوه کپسوله‌سازی یک درخواست HTTP را در طول پشته TCP/IP به خوبی نشان داد.
+The HTTP packet was successfully analyzed using Wireshark.
+
+Important protocol header fields from the **Application**, **Transport**, and **Network** layers were extracted successfully.
+
+This phase clearly demonstrates how an HTTP request is encapsulated within the TCP/IP protocol stack before being transmitted across the network.
+---
+
+# Phase 3 – Server Response and RTT Analysis
+
+## Objectives
+
+- Locate the HTTP response corresponding to the previously captured HTTP GET request.
+- Extract the HTTP Status Code and explain its technical meaning.
+- Measure the Round Trip Time (RTT) using the Time Delta value.
+- Analyze possible causes of network delays greater than two seconds.
 
 ---
 
-# فاز سوم: تحلیل رفتار سرور و زمان‌بندی RTT (Phase 3)
+## Wireshark Display Filters
 
-## اهداف فاز سوم
-
-- پیدا کردن پکت پاسخ سرور مرتبط با درخواست GET ارسال‌شده (HTTP/1.1 200 OK)
-- استخراج کد وضعیت (Status Code) و شرح معنای فنی آن
-- محاسبه دقیق زمان رفت‌وبرگشت (RTT / Time Delta) در لایه کاربرد
-- تحلیل مهندسی سناریوی کندی شبکه و تأخیرهای بالای ۲ ثانیه
-
----
-
-## فیلترهای مورد استفاده در Wireshark
-
+```text
 http.response.code == 200
-یا
+```
+
+or
+
+```text
 http
+```
 
 ---
 
-## فایل‌های فاز سوم
+## Phase 3 Files
 
-### فایل کاپچر (Capture File)
+### Capture File
+
+```text
 captures/phase3_http_traffic.pcapng
+```
 
-### تصاویر
+### Images
+
+```text
 images/phase3/image1_highlight.png
+```
 
-### گزارش تفصیلی
+### Detailed Report
+
+```text
 report/phase3_report.md
+```
 
 ---
 
-## داده‌های استخراج‌شده از پکت پاسخ
+## HTTP Response Analysis
 
-نام فیلد / شاخص | مقدار استخراج‌شده | توضیح و معنای فنی
----|---|---
-کد وضعیت (Status Code) | 200 OK | کد 200 OK نشان می‌دهد که درخواست HTTP GET ارسال‌شده از سمت کلاینت با موفقیت توسط سرور دریافت، فهمیده و پردازش شده است. فایل درخواستی (/connecttest.txt) در بدنه پاسخ بازگردانده شده است.
-فریم درخواست (Request Frame) | Frame 561 | پکت درخواست اولیه HTTP GET که از کلاینت 192.168.1.12 به سرور 185.200.125.154 فرستاده شده است.
-فریم پاسخ (Response Frame) | Frame 568 | پکت پاسخ سرور 185.200.125.154 که به کلاینت 192.168.1.12 بازگشته است.
-زمان پاسخ (Time Delta / RTT) | 370.416100 ms | مدت زمان دقیق سپری شده بین ارسال درخواست GET (پکت ۵۶۱) تا دریافت اولین پکت پاسخ (پکت ۵۶۸) در لایه کاربرد که حدود ۰.۳۷ ثانیه است.
-
----
-
-## تحلیل مهندسی: سناریوی کندی و تاخیر (بیش از ۲ ثانیه)
-
-در صورتی که مقدار Time Delta بیش از ۲ ثانیه طول بکشد، ریشه مشکل بر اساس اصولی مهندسی شبکه در ۳ بخش قابل تحلیل است:
-
-۱. مشکل از سمت کلاینت (Client-Side):
-   - درگیری شدید منابع سخت‌افزاری: پردازش بالا در CPU یا کمبود حافظه RAM کلاینت می‌تواند باعث تاخیر در ایجاد پکت، مدیریت صف‌های کارت شبکه و پردازش پاسخ شود.
-   - تأخیر نرم‌افزارهای امنیتی: عملکرد آنتی‌ویروس یا فایروال محلی (DPI / Deep Packet Inspection) که پکت‌ها را پیش از تحویل به لایه کاربرد عمیقاً بررسی می‌کند.
-
-۲. مشکل از سمت پهنای باند و مسیر شبکه (Network Bottleneck):
-   - ترافیک و ازدحام شبکه (Congestion): بالا بودن تعداد Hopهای بین‌راهی، مسیریابی نامناسب ISPها یا تاخیر انتشار فیزیکی.
-   - اتلاف پکت و ارسال مجدد (Packet Loss & Retransmission): افت پکت‌ها در روترهای بین‌راهی موجب بازفرستادن پکت‌ها در لایه TCP شده که تاخیر لایه کاربرد را به شدت افزایش می‌دهد.
-
-۳. مشکل از سمت پردازش‌های درونی سرور (Server-Side):
-   - پردازش سنگین منطق برنامه (Business Logic): سرور پکت را سریع دریافت کرده اما زمان زیادی را صرف اجرای کد، کوئری‌های سنگین و بهینه‌نشده روی دیتابیس یا فراخوانی سرویس‌های دیگر می‌کند.
-   - بار بالای سرور (High Server Load): شلوغی سرور و عدم پاسخگویی مناسب به درخواست‌های هم‌زمان (Concurrent Requests) که باعث ایجاد صف تاخیر در پاسخگویی می‌شود.
+| Field | Value | Description |
+|------|-------|-------------|
+| Status Code | **200 OK** | Indicates that the HTTP GET request was successfully received, understood, and processed by the server. |
+| Request Frame | **Frame 561** | The original HTTP GET request sent from the client to the server. |
+| Response Frame | **Frame 568** | The HTTP response returned by the server. |
+| Time Delta (RTT) | **370.416100 ms** | The elapsed time between sending the HTTP request and receiving the first response packet. |
 
 ---
 
-## نتیجه فاز سوم
+## Network Delay Analysis
 
-پکت پاسخ HTTP به‌طور دقیق ایزوله و تحلیل شد. کد وضعیت (200 OK) و زمان RTT لایه کاربرد (370.416100 ms) استخراج شده و دور آن‌ها کادر کشیده شد. تحلیل مهندسی کندی شبکه نیز دید کاملی از عیب‌یابی لایه‌های شبکه ارائه داد.
+If the measured **Round Trip Time (RTT)** exceeds **2 seconds**, the delay may originate from one or more of the following sources.
 
----
+### 1. Client-Side Issues
 
-# فاز چهارم (امتیاز تشویقی): کالبدشکافی HTTPS & TLS
-
-## اهداف فاز چهارم
-
-- تولید ترافیک امن با curl https://example.com
-- شناسایی و استخراج پکت‌های Client Hello و Server Hello در Wireshark
-- بررسی نحوه رمزنگاری داده‌ها و علت عدم دسترسی به متن ساده (Plain Text) هدرهای HTTP
+- High CPU utilization.
+- Insufficient available RAM.
+- Packet inspection performed by antivirus or firewall software.
+- Heavy background processes affecting packet generation and processing.
 
 ---
 
-## دستور استفاده‌شده
+### 2. Network Issues
 
+- Network congestion.
+- Long routing paths.
+- Packet loss.
+- TCP retransmissions caused by lost packets.
+- High latency introduced by Internet Service Providers (ISPs).
+
+---
+
+### 3. Server-Side Issues
+
+- Heavy application processing.
+- Slow database queries.
+- High server workload.
+- A large number of concurrent client requests.
+
+---
+
+## Phase 3 Result
+
+The HTTP response packet was successfully identified and analyzed.
+
+The **HTTP Status Code (200 OK)** and the **Round Trip Time (370.416100 ms)** were successfully extracted from the captured traffic.
+
+In addition, several possible causes of high network latency were analyzed from the client, network, and server perspectives.
+---
+
+# Phase 4 (Bonus) – HTTPS and TLS Handshake Analysis
+
+## Objectives
+
+- Generate secure HTTPS traffic using cURL.
+- Capture and identify the **Client Hello** and **Server Hello** packets in Wireshark.
+- Analyze the TLS Handshake process.
+- Understand why HTTP headers are encrypted and cannot be viewed as plain text.
+
+---
+
+## Command Used
+
+```bash
 curl https://example.com
+```
 
 ---
 
-## فیلتر مورد استفاده در Wireshark
+## Wireshark Display Filter
 
+```text
 tls
+```
 
 ---
 
-## فایل‌های فاز چهارم
+## Phase 4 Files
 
-### فایل کاپچر (Capture File)
+### Capture File
+
+```text
 captures/phase4_tls_traffic.pcapng
+```
 
-### تصاویر
+### Images
+
+```text
 images/phase4/image1_tls_handshake.png
+```
 
-### گزارش تفصیلی
+### Detailed Report
+
+```text
 report/phase4_report.md
+```
 
 ---
 
-## خلاصه تحلیل TLS Handshake
+## TLS Handshake Analysis
 
-شماره فریم | نوع پکت (Message Type) | آدرس مبدا | آدرس مقصد | شرح و نقش فنی
----|---|---|---|---
-Frame 26 | Client Hello | 192.168.1.12 | 188.114.99.0 | شروع ارتباط امن از سمت کلاینت، ارسال الگوریتم‌های رمزنگاری پشتیبانی‌شده و تعیین دامنه مقصد (SNI=example.com).
-Frame 28 | Server Hello | 188.114.99.0 | 192.168.1.12 | پاسخ سرور، انتخاب الگوریتم رمزنگاری مشترک و ارائه گواهی دیجیتال جهت احراز هویت.
-
-### علت عدم مشاهده هدرهای HTTP به صورت Plain Text:
-در HTTPS، لایه امنیتی TLS بین لایه انتقال (TCP) و لایه کاربرد (HTTP) قرار می‌گیرد. پس از اتمام دست‌تکانی (TLS Handshake) و توافق روی کلیدهای متقارن، تمام ترافیک بعدی لایه کاربرد به صورت Application Data رمزنگاری شده (Ciphertext) منتقل می‌شود. به همین دلیل تمامی هدرهای HTTP در محتوای رمزشده کپسوله می‌شوند و برای شنودکننده به صورت متن ساده قابل مشاهده نیستند.
+| Frame | Message Type | Source Address | Destination Address | Description |
+|-------|--------------|----------------|---------------------|-------------|
+| Frame 26 | Client Hello | 192.168.1.12 | 188.114.99.0 | Initiates a secure connection by sending the supported TLS versions, cipher suites, extensions, and the Server Name Indication (SNI) for **example.com**. |
+| Frame 28 | Server Hello | 188.114.99.0 | 192.168.1.12 | Selects the TLS version and cipher suite, then begins the server authentication process by presenting its digital certificate. |
 
 ---
 
-## جمع‌بندی نهایی پروژه (Conclusion)
+## Why HTTP Headers Cannot Be Viewed in Plain Text
 
-این پروژه یک مطالعه عملی و جامع از ارتباطات شبکه را با استفاده از ابزارهای وایرشارک و cURL ارائه داد:
+Unlike HTTP, **HTTPS** encrypts all application-layer data using the **Transport Layer Security (TLS)** protocol.
 
-- فاز اول: نحوه تولید ترافیک و ضبط خام پکت‌ها را آموزش داد.
-- فاز دوم: کپسوله‌سازی و هدرهای لایه‌های مختلف (شبکه، انتقال و کاربرد) را بررسی کرد.
-- فاز سوم: بر صحت‌سنجی پاسخ سرور، محاسبه RTT لایه کاربرد و عیب‌یابی علل تاخیر در شبکه تمرکز داشت.
-- فاز چهارم (تشویقی): مکانیسم‌های امنیتی TLS Handshake و رمزنگاری ترافیک HTTPS را تحلیل نمود.
+After the TLS Handshake is completed and both parties agree on shared encryption keys, all HTTP requests and responses are transmitted as encrypted **Application Data**.
 
-مجموعه این فازها مهارت عملی بالایی در تحلیل، فیلترنویسی و ریشه‌یابی مشکلات ترافیک شبکه ایجاد می‌کند.
+As a result, HTTP headers and message contents are no longer visible in plain text within Wireshark unless the session keys are available for decryption.
+
+---
+
+## Phase 4 Result
+
+The TLS Handshake was successfully captured and analyzed.
+
+The **Client Hello** and **Server Hello** messages were identified, demonstrating how HTTPS establishes a secure communication channel before transmitting encrypted application data.
+
+---
+
+# Final Conclusion
+
+This project provided a comprehensive hands-on study of HTTP communication and packet analysis using **Wireshark** and **cURL**.
+
+Throughout the project:
+
+- **Phase 1** demonstrated how to generate and capture HTTP traffic.
+- **Phase 2** focused on analyzing protocol headers across the Application, Transport, and Network layers of the TCP/IP model.
+- **Phase 3** examined HTTP server responses, extracted the **200 OK** status code, measured the **Round Trip Time (RTT)**, and discussed possible causes of network latency.
+- **Phase 4 (Bonus)** explored HTTPS communication, the TLS Handshake process, and the role of encryption in protecting HTTP traffic.
+
+Overall, this project strengthened practical skills in network traffic analysis, protocol inspection, packet filtering, troubleshooting, and understanding secure web communication.
