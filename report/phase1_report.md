@@ -1,61 +1,61 @@
-# Phase 1 Report
+# گزارش فاز اول
 
-## Objective
+## هدف
 
-The objective of this phase is to generate HTTP traffic using cURL and capture it using Wireshark.
+هدف از این فاز، تولید ترافیک HTTP با استفاده از ابزار **cURL** و ضبط آن توسط نرم‌افزار **Wireshark** است تا بسته‌های شبکه برای تحلیل در مراحل بعدی ثبت شوند.
 
 ---
 
-## Tools
+## ابزارهای مورد استفاده
 
 - Wireshark
 - cURL
-- Windows Command Prompt
+- خط فرمان ویندوز (Windows Command Prompt)
 
 ---
 
-## Procedure
+## مراحل انجام کار
 
-### Step 1
+### مرحله ۱
 
-Started packet capture on the active Wi-Fi interface using Wireshark.
+نرم‌افزار **Wireshark** اجرا شد و فرآیند ضبط بسته‌های شبکه (Packet Capture) بر روی رابط شبکه فعال (Wi-Fi) آغاز گردید.
 
-### Step 2
+### مرحله ۲
 
-Generated HTTP traffic using the following commands:
+به‌منظور تولید ترافیک HTTP، دستورات زیر در محیط **Command Prompt** اجرا شدند:
 
 ```bash
 curl http://example.com
 curl http://neverssl.com
 ```
 
-### Step 3
+### مرحله ۳
 
-Stopped packet capture and saved the capture file.
+پس از ارسال درخواست‌ها، فرآیند ضبط بسته‌ها متوقف شد و فایل Capture با فرمت **PCAPNG** ذخیره گردید.
 
-### Step 4
+### مرحله ۴
 
-Filtered HTTP packets using:
+برای مشاهده و جداسازی بسته‌های مربوط به درخواست‌های HTTP، از فیلتر زیر در نرم‌افزار Wireshark استفاده شد:
 
 ```text
 http.request
 ```
 
-### Step 5
+### مرحله ۵
 
-Analyzed the HTTP GET request and HTTP response (200 OK).
+در نهایت، درخواست **HTTP GET** و پاسخ دریافتی از سرور (**HTTP 200 OK**) مورد بررسی و تحلیل قرار گرفتند.
 
 ---
 
-## Files
+## فایل‌های ایجاد شده
 
-### Capture
+### فایل ضبط ترافیک (Capture)
 
 ```
 captures/phase1_capture.pcapng
 ```
 
-### Images
+### تصاویر
 
 ```
 images/phase1/image1_capture.png
@@ -67,8 +67,6 @@ images/phase1/image5_http_response_200_ok.png
 
 ---
 
-## Result
+## نتیجه‌گیری
 
-HTTP traffic was successfully generated using cURL.
-
-The HTTP GET request and the HTTP response were captured and analyzed successfully using Wireshark.
+در این فاز، ترافیک **HTTP** با موفقیت توسط ابزار **cURL** تولید و با استفاده از نرم‌افزار **Wireshark** ضبط شد. سپس درخواست **HTTP GET** و پاسخ سرور (**HTTP 200 OK**) شناسایی و تحلیل شدند. نتایج این مرحله، مبنای بررسی دقیق‌تر هدرهای پروتکل و تحلیل لایه‌های مختلف شبکه در فازهای بعدی پروژه را فراهم کرد.
